@@ -1,0 +1,40 @@
+package com.bvrsoftware.entites;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "subcategory")
+public class SubCategory {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String subCategoryName;
+	private String creationDate;
+	
+	@ManyToOne
+	private Categories category;
+	
+	@OneToMany(mappedBy = "subcategory", cascade = CascadeType.ALL)
+	private List<Complaints> complaint = new ArrayList<>();
+	
+}
